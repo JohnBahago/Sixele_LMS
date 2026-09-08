@@ -20,7 +20,7 @@ async def lifespan(app: FastAPI):
         await scheduler.stop()
         await close_db()
 
-app = FastAPI(title=app_settings.app_name, version="3.4.0", lifespan=lifespan)
+app = FastAPI(title=app_settings.app_name, version="3.4.1", lifespan=lifespan)
 
 if app_settings.environment.lower() in {"production", "prod"} and app_settings.jwt_secret == "change-me-in-production":
     raise RuntimeError("JWT_SECRET must be changed in production")
@@ -28,7 +28,7 @@ if app_settings.environment.lower() in {"production", "prod"} and app_settings.j
 app.add_middleware(SecurityMiddleware)
 origins = [x.strip() for x in app_settings.cors_origins.split(",") if x.strip()]
 app.add_middleware(CORSMiddleware, allow_origins=origins, allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
-for router in [health.router, auth.router, roles.router, users.router, audit.router, courses.router, activities.router, quizzes.router, enrollments.router, instructors.router, instructor_dashboard.router, notifications.router, certificates.router, reports.router, content.router, catalog.router, learner_portal.router, learner_experience.router, assignments.router, instructor_portal.router, course_builder.router, admin_operations.router, course_versions.router, notification_events.router, email.router, jobs.router, settings_api.router, cohorts.router, cohort_portal, attendance.learner_router, cohort_portal, attendance.instructor_router, attendance_compliance.router]:
+for router in [health.router, auth.router, roles.router, users.router, audit.router, courses.router, activities.router, quizzes.router, enrollments.router, instructors.router, instructor_dashboard.router, notifications.router, certificates.router, reports.router, content.router, catalog.router, learner_portal.router, learner_experience.router, assignments.router, instructor_portal.router, course_builder.router, admin_operations.router, course_versions.router, notification_events.router, email.router, jobs.router, settings_api.router, cohorts.router, cohort_portal.learner_router, cohort_portal.instructor_router, attendance.router, attendance_compliance.router]:
     app.include_router(router, prefix=app_settings.api_prefix)
 
 
