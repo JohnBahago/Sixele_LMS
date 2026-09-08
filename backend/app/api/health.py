@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from app.database.mongodb import db
 
-router = APIRouter(tags=["System"])
+router = APIRouter(tags=["Health"])
 
 @router.get("/health")
 async def health():
