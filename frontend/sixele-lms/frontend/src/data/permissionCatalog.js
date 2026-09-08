@@ -1,0 +1,15 @@
+export const permissionCatalog = [
+  { group: 'Users', items: ['users.view','users.create','users.edit','users.delete','users.manage'] },
+  { group: 'Roles & Permissions', items: ['roles.view','roles.create','roles.edit','roles.delete','roles.manage'] },
+  { group: 'Courses', items: ['courses.view','courses.create','courses.edit','courses.delete','courses.publish','courses.archive'] },
+  { group: 'Modules & Lessons', items: ['modules.view','modules.create','modules.edit','modules.delete','lessons.view','lessons.create','lessons.edit','lessons.delete'] },
+  { group: 'Activities & Assignments', items: ['activities.view','activities.create','activities.edit','activities.delete','activities.assess','assignments.view','assignments.create','assignments.edit','assignments.delete','assignments.grade'] },
+  { group: 'Assessments', items: ['assessments.view','assessments.create','assessments.edit','assessments.delete','assessments.grade','assessments.rubrics.manage'] },
+  { group: 'Submissions', items: ['submissions.view','submissions.review','submissions.approve','submissions.return','submissions.grade'] },
+  { group: 'Enrollments', items: ['enrollments.view','enrollments.create','enrollments.edit','enrollments.cancel','enrollments.manage'] },
+  { group: 'Certificates', items: ['certificates.view','certificates.create','certificates.issue','certificates.revoke','certificates.verify','certificates.templates.manage'] },
+  { group: 'Reports', items: ['reports.view','reports.export'] },
+  { group: 'Content Library', items: ['content.view','content.upload','content.edit','content.delete','content.manage'] },
+  { group: 'Notifications', items: ['notifications.view','notifications.create','notifications.manage'] },
+  { group: 'Settings & Audit', items: ['settings.view','settings.edit','audit.view','audit.export'] },
+]
