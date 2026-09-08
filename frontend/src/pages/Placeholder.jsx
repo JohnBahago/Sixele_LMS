@@ -1,0 +1,1 @@
+export default function Placeholder({title}){return <div className="six-surface border p-10 text-center"><h1 className="text-2xl font-bold">{title}</h1><p className="six-muted mt-2">This module is part of the Sixele LMS build and will be implemented next.</p></div>}

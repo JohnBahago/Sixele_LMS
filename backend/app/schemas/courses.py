@@ -93,6 +93,9 @@ class LessonCreate(BaseModel):
     duration_minutes: int | None = Field(default=None, ge=0)
     order: int = Field(default=0, ge=0)
     is_required: bool = True
+    video_url: str | None = None
+    release_at: datetime | None = None
+    prerequisite_lesson_ids: list[str] = []
 
 class LessonUpdate(BaseModel):
     title: str | None = Field(default=None, min_length=2, max_length=200)
@@ -102,6 +105,9 @@ class LessonUpdate(BaseModel):
     duration_minutes: int | None = Field(default=None, ge=0)
     order: int | None = Field(default=None, ge=0)
     is_required: bool | None = None
+    video_url: str | None = None
+    release_at: datetime | None = None
+    prerequisite_lesson_ids: list[str] | None = None
 
 class LessonResponse(BaseModel):
     id: str
@@ -114,6 +120,9 @@ class LessonResponse(BaseModel):
     duration_minutes: int | None
     order: int
     is_required: bool
+    video_url: str | None = None
+    release_at: datetime | None = None
+    prerequisite_lesson_ids: list[str] = []
     created_at: datetime
     updated_at: datetime
 

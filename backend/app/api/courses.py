@@ -35,7 +35,7 @@ def module_response(doc: dict) -> ModuleResponse:
     return ModuleResponse(id=str(doc["_id"]), course_id=str(doc["course_id"]), title=doc["title"], description=doc.get("description", ""), order=doc.get("order", 0), created_at=doc["created_at"], updated_at=doc["updated_at"])
 
 def lesson_response(doc: dict) -> LessonResponse:
-    return LessonResponse(id=str(doc["_id"]), course_id=str(doc["course_id"]), module_id=str(doc["module_id"]), title=doc["title"], description=doc.get("description", ""), lesson_type=doc.get("lesson_type", "reading"), content=doc.get("content", ""), duration_minutes=doc.get("duration_minutes"), order=doc.get("order", 0), is_required=doc.get("is_required", True), created_at=doc["created_at"], updated_at=doc["updated_at"])
+    return LessonResponse(id=str(doc["_id"]), course_id=str(doc["course_id"]), module_id=str(doc["module_id"]), title=doc["title"], description=doc.get("description", ""), lesson_type=doc.get("lesson_type", "reading"), content=doc.get("content", ""), duration_minutes=doc.get("duration_minutes"), order=doc.get("order", 0), is_required=doc.get("is_required", True), video_url=doc.get("video_url"), release_at=doc.get("release_at"), prerequisite_lesson_ids=[str(x) for x in doc.get("prerequisite_lesson_ids", [])], created_at=doc["created_at"], updated_at=doc["updated_at"])
 
 @router.get("", response_model=list[CourseResponse])
 async def list_courses(status_filter: CourseStatus | None = Query(None, alias="status"), search: str | None = None, user=Depends(get_current_user)):

@@ -1,0 +1,17 @@
+import { useEffect,useState } from 'react'
+import { Award, Download, FileText, ShieldCheck } from 'lucide-react'
+import { api } from '../../services/api'
+const fmt=v=>v?new Date(v).toLocaleDateString():'—'
+export default function AcademicRecord(){
+ const [data,setData]=useState(null),[loading,setLoading]=useState(true),[error,setError]=useState('')
+ useEffect(()=>{api.academicRecord().then(setData).catch(e=>setError(e.message)).finally(()=>setLoading(false))},[])
+ const download=()=>{if(!data)return; const lines=[`Sixele Academic Record`,`Learner: ${data.learner_name}`,`Generated: ${fmt(data.generated_at)}`,``,`Course,Status,Progress,Score,Certificate`].concat(data.records.map(r=>[r.course_title,r.status,`${r.progress_percent}%`,r.score==null?'':`${r.score}%`,r.certificate_number||''].map(x=>`"${String(x).replaceAll('"','""')}"`).join(','))); const blob=new Blob([lines.join('\n')],{type:'text/csv;charset=utf-8'}); const url=URL.createObjectURL(blob); const a=document.createElement('a');a.href=url;a.download='sixele-academic-record.csv';a.click();URL.revokeObjectURL(url)}
+ return <div className="space-y-6 six-animate-rise">
+  <div className="flex flex-wrap items-start justify-between gap-4"><div><h1 className="text-2xl font-bold">Academic Record</h1><p className="six-muted mt-1">Your verified learning history, grades, completion status, and certificates.</p></div><button onClick={download} disabled={!data} className="six-button px-4 py-2 rounded-xl inline-flex items-center gap-2"><Download size={17}/> Export record</button></div>
+  {error&&<div className="p-3 rounded-xl border border-red-200 bg-red-50 text-red-700 text-sm">{error}</div>}
+  {loading?<div className="six-surface border p-10 text-center six-muted">Building your academic record…</div>:data&&<>
+   <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-4">{[['Courses',data.total_courses,FileText],['Completed',data.completed_courses,Award],['Certificates',data.certificates_issued,ShieldCheck],['Average score',data.average_score==null?'—':`${data.average_score}%`,Award]].map(([label,value,Icon])=><div key={label} className="six-surface border p-5 six-task-card"><Icon size={20} className="six-primary-text"/><div className="text-2xl font-bold mt-3">{value}</div><div className="six-muted text-sm">{label}</div></div>)}</div>
+   <div className="six-surface border overflow-hidden"><div className="p-5 border-b six-border"><h2 className="font-semibold">Course history</h2><p className="six-muted text-sm mt-1">Generated {fmt(data.generated_at)}</p></div><div className="overflow-x-auto"><table className="w-full text-sm"><thead><tr className="text-left six-muted border-b six-border"><th className="p-4">Course</th><th className="p-4">Status</th><th className="p-4">Progress</th><th className="p-4">Score</th><th className="p-4">Certificate</th></tr></thead><tbody>{data.records.map(r=><tr key={r.enrollment_id} className="border-b six-border hover:bg-black/[.02]"><td className="p-4 font-medium">{r.course_title}<div className="six-muted text-xs mt-1">Enrolled {fmt(r.enrolled_at)}{r.completed_at&&` · Completed ${fmt(r.completed_at)}`}</div></td><td className="p-4"><span className="px-2 py-1 rounded-full text-xs bg-black/5">{r.status}</span></td><td className="p-4">{r.progress_percent}%</td><td className="p-4">{r.score==null?'—':`${r.score}%`}</td><td className="p-4">{r.certificate_number?<span className="inline-flex items-center gap-1 text-xs"><ShieldCheck size={14}/> {r.certificate_number}</span>:'—'}</td></tr>)}</tbody></table></div></div>
+  </>}
+ </div>
+}

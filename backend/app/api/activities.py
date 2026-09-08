@@ -49,6 +49,7 @@ def activity_response(doc: dict) -> ActivityResponse:
         attempts_allowed=doc.get("attempts_allowed", 1), due_days=doc.get("due_days"),
         is_required=doc.get("is_required", True), order=doc.get("order", 0),
         rubric_id=str(doc["rubric_id"]) if doc.get("rubric_id") else None,
+        prerequisite_activity_ids=[str(x) for x in doc.get("prerequisite_activity_ids", [])],
         status=doc.get("status", "draft"), created_by=str(doc["created_by"]),
         created_at=doc["created_at"], updated_at=doc["updated_at"],
     )

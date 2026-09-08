@@ -13,6 +13,7 @@ PERMISSION_CATALOG = [
     ("reports", "View"), ("reports", "Export"),
     ("content", "View"), ("content", "Upload"), ("content", "Edit"), ("content", "Delete"), ("content", "Manage"),
     ("notifications", "View"), ("notifications", "Create"), ("notifications", "Manage"),
+    ("communications", "View"), ("communications", "Create"), ("communications", "Manage"),
     ("settings", "View"), ("settings", "Edit"),
     ("audit", "View"), ("audit", "Export"),
     ("security", "View"), ("security", "Manage"),

@@ -48,6 +48,7 @@ class ActivityCreate(BaseModel):
     is_required: bool = True
     order: int = Field(default=0, ge=0)
     rubric_id: str | None = None
+    prerequisite_activity_ids: list[str] = []
 
 class ActivityUpdate(BaseModel):
     title: str | None = Field(default=None, min_length=2, max_length=200)
@@ -64,6 +65,7 @@ class ActivityUpdate(BaseModel):
     is_required: bool | None = None
     order: int | None = Field(default=None, ge=0)
     rubric_id: str | None = None
+    prerequisite_activity_ids: list[str] | None = None
 
 class ActivityResponse(BaseModel):
     id: str
@@ -83,6 +85,7 @@ class ActivityResponse(BaseModel):
     is_required: bool
     order: int
     rubric_id: str | None
+    prerequisite_activity_ids: list[str] = []
     status: str
     created_by: str
     created_at: datetime

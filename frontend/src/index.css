@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+:root { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: var(--text); background: var(--background); }
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; background: var(--background); }
+button, input, select { font: inherit; }
+
+:root { --primary:#b91c1c; --primary-soft:#fee2e2; --sidebar:#292929; --surface:#fff; --background:#f3f4f6; --text:#202124; --muted:#6b7280; --border:#e5e7eb; --hover:#f3f4f6; --shadow:0 1px 2px rgba(0,0,0,.04); }
+body { --card-radius: 1rem; }
+body.theme-sixele { --primary:#b91c1c; --primary-soft:#fee2e2; --sidebar:#292929; --surface:#fff; --background:#f3f4f6; --text:#202124; --muted:#6b7280; --border:#e5e7eb; --hover:#f3f4f6; }
+body.theme-crimson { --primary:#991b1b; --primary-soft:#fee2e2; --sidebar:#27272a; --surface:#fff; --background:#f4f4f5; --text:#18181b; --muted:#71717a; --border:#e4e4e7; --hover:#f4f4f5; }
+body.theme-ruby { --primary:#dc2626; --primary-soft:#fee2e2; --sidebar:#374151; --surface:#fff; --background:#f1f5f9; --text:#1f2937; --muted:#64748b; --border:#e2e8f0; --hover:#f1f5f9; }
+body.theme-graphite { --primary:#52525b; --primary-soft:#e4e4e7; --sidebar:#18181b; --surface:#fff; --background:#f4f4f5; --text:#18181b; --muted:#71717a; --border:#e4e4e7; --hover:#f4f4f5; }
+body.theme-midnight { --primary:#ef4444; --primary-soft:#451a1a; --sidebar:#111827; --surface:#1f2937; --background:#111827; --text:#f9fafb; --muted:#9ca3af; --border:#374151; --hover:#273449; }
+body.theme-cloud { --primary:#b91c1c; --primary-soft:#fee2e2; --sidebar:#4b5563; --surface:#fff; --background:#f8fafc; --text:#1f2937; --muted:#64748b; --border:#e2e8f0; --hover:#f1f5f9; }
+body.theme-rosewood { --primary:#9f1239; --primary-soft:#ffe4e6; --sidebar:#3f3f46; --surface:#fffaf9; --background:#f5f3f2; --text:#292524; --muted:#78716c; --border:#e7e5e4; --hover:#f5f5f4; }
+body.mode-dark { --surface:#1f2937; --background:#111827; --text:#f9fafb; --muted:#9ca3af; --border:#374151; --hover:#273449; --primary-soft:#451a1a; }
+body.mode-light { }
+body.mode-system { color-scheme: light; }
+@media (prefers-color-scheme: dark) { body.mode-system { --surface:#1f2937; --background:#111827; --text:#f9fafb; --muted:#9ca3af; --border:#374151; --hover:#273449; } }
+
+.six-surface{background:var(--surface);border-color:var(--border);border-radius:var(--card-radius);box-shadow:var(--shadow)}
+.six-header{background:var(--surface);border-bottom:1px solid var(--border);color:var(--text)}
+.six-sidebar-solid{background:var(--sidebar)}
+.six-sidebar-soft{background:color-mix(in srgb,var(--sidebar) 92%,white);}
+.six-nav-active{background:var(--primary);color:white;box-shadow:0 8px 20px color-mix(in srgb,var(--primary) 25%,transparent)}
+.six-primary-bg{background:var(--primary)} .six-primary-text{color:var(--primary)} .six-primary-soft{background:var(--primary-soft)}
+.six-muted{color:var(--muted)} .six-border{border-color:var(--border)} .six-hover:hover{background:var(--hover)}
+.six-button{background:var(--primary);color:#fff}.six-button:hover{filter:brightness(.94)}
+.six-input{background:var(--surface);color:var(--text);border:1px solid var(--border)}
+.six-body-text{color:var(--text)}
+.radius-standard{--card-radius:.75rem}.radius-sharp{--card-radius:.25rem}.radius-rounded{--card-radius:1rem}
+.density-compact .six-table-cell,.density-compact .six-control{padding-top:.55rem;padding-bottom:.55rem}.density-comfortable .six-table-cell,.density-comfortable .six-control{padding-top:.8rem;padding-bottom:.8rem}
+
+/* Sixele v1.8 motion system: subtle, purposeful, and reduced-motion friendly. */
+.six-animate-rise{animation:sixRise .42s cubic-bezier(.22,1,.36,1) both}
+.six-animate-pop{animation:sixPop .32s cubic-bezier(.22,1,.36,1) both}
+.six-task-card{transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}
+.six-task-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,0,0,.08);border-color:color-mix(in srgb,var(--primary) 35%,var(--border))}
+.six-task-card:active{transform:translateY(-1px) scale(.995)}
+.six-task-icon{transition:transform .25s ease,background .25s ease}.six-task-card:hover .six-task-icon{transform:rotate(-3deg) scale(1.06)}
+.six-progress-fill{transition:width .7s cubic-bezier(.22,1,.36,1)}
+.six-complete{background:color-mix(in srgb,var(--primary-soft) 55%,var(--surface));border-color:color-mix(in srgb,var(--primary) 20%,var(--border))}
+.six-complete-glow{animation:sixGlow 1.8s ease-in-out infinite alternate}
+.six-tooltip{animation:sixTooltip .14s ease-out both;pointer-events:none}
+.six-shimmer{background:linear-gradient(100deg,transparent 20%,color-mix(in srgb,var(--surface) 55%,transparent) 50%,transparent 80%);background-size:200% 100%;animation:sixShimmer 1.6s linear infinite}
+@keyframes sixRise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes sixPop{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
+@keyframes sixTooltip{from{opacity:0;transform:translate(-50%,3px)}to{opacity:1;transform:translate(-50%,0)}}
+@keyframes sixGlow{from{box-shadow:0 0 0 rgba(185,28,28,0)}to{box-shadow:0 0 24px color-mix(in srgb,var(--primary) 18%,transparent)}}
+@keyframes sixShimmer{to{background-position:-200% 0}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}
+
+/* Sixele v1.9 interactive learning workspace */
+.six-tool-chip,.six-lesson-tools span{display:inline-flex;align-items:center;gap:.45rem;padding:.45rem .7rem;border:1px solid var(--border);border-radius:999px;background:var(--hover);font-size:.75rem;color:var(--muted)}
+.six-task-tip{border:1px solid color-mix(in srgb,var(--primary) 22%,var(--border));background:color-mix(in srgb,var(--primary-soft) 62%,var(--surface));border-radius:1rem;padding:1rem}
+.six-icon-button{padding:.35rem;border-radius:.6rem}.six-icon-button:hover{background:var(--surface)}
+.six-icon-button svg{transition:transform .2s ease}.six-lesson-tools{display:flex;flex-wrap:wrap;gap:.6rem}
+.six-celebration{position:fixed;inset:0;z-index:60;pointer-events:none;display:grid;place-items:center}.six-celebration-card{display:flex;gap:.8rem;align-items:center;padding:1rem 1.2rem;background:var(--surface);border:1px solid var(--border);border-radius:1rem;box-shadow:0 20px 60px rgba(0,0,0,.18);animation:sixCelebration .55s cubic-bezier(.22,1,.36,1) both}.six-confetti{position:absolute;inset:0;overflow:hidden}.six-confetti i{position:absolute;left:calc(50% + (var(--i) - 9) * 22px);top:50%;width:7px;height:14px;background:var(--primary);border-radius:2px;animation:sixConfetti 1.2s ease-out both;animation-delay:calc(var(--i) * 12ms)}
+@keyframes sixCelebration{from{opacity:0;transform:translateY(18px) scale(.9)}to{opacity:1;transform:none}}@keyframes sixConfetti{to{transform:translate(calc((var(--i) - 9) * 14px),calc(-140px - (var(--i) % 5) * 28px)) rotate(240deg);opacity:0}}
+
+/* Sixele v2.0 platform polish */
+.six-search{border:1px solid var(--border);background:var(--surface)}
+.six-search:focus-within{border-color:color-mix(in srgb,var(--primary) 45%,var(--border));box-shadow:0 0 0 4px color-mix(in srgb,var(--primary) 10%,transparent)}
+.six-stagger>*{animation:sixRise .42s cubic-bezier(.22,1,.36,1) both}
+.six-pulse-dot{animation:sixPulse 1.8s ease-in-out infinite}
+@keyframes sixPulse{0%,100%{transform:scale(1);opacity:.75}50%{transform:scale(1.22);opacity:1}}
+
+/* Sixele v2.1 professional course player */
+.six-player-sticky{position:sticky;top:1rem;z-index:10}
+.six-player-progress{height:5px;border-radius:999px;background:var(--hover);overflow:hidden}.six-player-progress>span{display:block;height:100%;background:var(--primary);transition:width .6s ease}
+@media (max-width:1023px){.six-player-sticky{position:static}}
+/* Sixele v2.4 authoring experience */
+[contenteditable][data-placeholder]:empty:before{content:attr(data-placeholder);color:var(--muted)}
+.prose h3{font-size:1.15rem;font-weight:700;margin:.8rem 0}.prose ul{list-style:disc;padding-left:1.5rem}.prose ol{list-style:decimal;padding-left:1.5rem}.prose p{margin:.55rem 0}
